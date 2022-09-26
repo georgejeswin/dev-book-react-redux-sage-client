@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import SignupImage from "../../assets/signup.png";
 const Signup = () => {
   return (
-    <div className="h-[100%] flex justify-center gap-4 items-center flex-wrap w-[100%]">
+    <div className="h-[90vh] flex justify-center gap-4 items-center flex-wrap w-[100%]">
       <form
         action=""
-        className="flex flex-col justify-center items-center min-w-[25%] mt-20"
+        className="flex flex-col justify-center items-center min-w-[25%]"
       >
         <div className="flex items-center gap-4 justify-center">
           <h1 className=" text-indigo-500 uppercase text-2xl font-bold mb-5">

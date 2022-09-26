@@ -26,6 +26,10 @@ const Home = () => {
           <FeedCard />
           <FeedCard />
           <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
         </div>
       </div>
       <div>
