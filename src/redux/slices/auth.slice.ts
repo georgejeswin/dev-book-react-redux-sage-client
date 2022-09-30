@@ -14,7 +14,7 @@ type InitialState = {
     | undefined;
 };
 
-export const initialAuthState: any = {
+export const initialAuthState: InitialState = {
   user: undefined,
   authenticated: false,
 };
@@ -48,6 +48,13 @@ export const setAuthenticatedUser = (
   state.authenticated = true;
 };
 
+export const logout = (
+  state: InitialState,
+  action: PayloadAction<{ callback: () => void }>
+) => {
+  state.authenticated = false;
+};
+
 export const clearAuthentication = (
   state: InitialState,
   action: PayloadAction<void>
@@ -63,6 +70,7 @@ const authSlice = createSlice({
     login,
     signup,
     setAuthenticatedUser,
+    logout,
     clearAuthentication,
   },
 });

@@ -10,8 +10,8 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Login />} />
         <Route path={PATH.HOME} element={<Home />} />
+        <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.SIGNUP} element={<Signup />} />
       </Routes>
     </BrowserRouter>

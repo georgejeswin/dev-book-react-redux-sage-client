@@ -21,8 +21,9 @@ function* login(
       username,
       password,
     });
-    storageEngine.set("jwt", response.data.access_token);
-    const user = jwtDecode(response.data.access_token);
+    storageEngine.set("jwt", response?.data?.access_token);
+    storageEngine.set("refresh", response?.data?.refresh_token);
+    const user = jwtDecode(response?.data?.access_token);
     yield put(authSlice.actions.setAuthenticatedUser(user));
     callback();
   } catch (err) {
@@ -53,9 +54,21 @@ function* signup(action: PayloadAction<signupParams>) {
   }
 }
 
+function* logout(action: PayloadAction<{ callback: () => void }>) {
+  try {
+    const { callback } = action.payload;
+    storageEngine.clear();
+    yield put(authSlice.actions.clearAuthentication());
+    callback();
+  } catch (error) {
+    console.log("Logout Failed", error);
+  }
+}
+
 function* authSaga() {
   yield takeEvery(authSlice.actions.login.type, login);
   yield takeEvery(authSlice.actions.signup.type, signup);
+  yield takeEvery(authSlice.actions.logout.type, logout);
 }
 
 export default authSaga;

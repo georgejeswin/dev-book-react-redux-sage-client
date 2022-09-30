@@ -1,4 +1,14 @@
-const FeedCard = () => {
+import { Post } from "../../interfaces/post";
+import dayjs from "dayjs";
+
+interface IPostProps {
+  content: Post;
+}
+
+const FeedCard = ({ content }: IPostProps) => {
+  const createdDate = dayjs(content?.created_at).format(
+    "dddd, MMMM D, YYYY h:mm A"
+  );
   return (
     <div className="round-lg flex flex-col shadow-lbutton_shadow dark:shadow-button_shadow p-5 rounded-lg mb-5 w-full">
       <div className="gap-3 flex items-center mb-2">
@@ -9,8 +19,8 @@ const FeedCard = () => {
           className="rounded-full"
         />
         <div className="flex flex-col items-start justify-center">
-          <p className="text-dtext_color text-sm">User name</p>
-          <span className="text-dtext_color text-xs">date</span>
+          <p className="text-dtext_color text-sm">{content.user?.username}</p>
+          <span className="text-dtext_color text-xs">{createdDate}</span>
         </div>
       </div>
       <div className="flex flex-col w-full flex-auto">
@@ -19,7 +29,7 @@ const FeedCard = () => {
           alt="Feed"
           className="rounded-lg w-full max-w-xl"
         />
-        <p className="text-dtext_color mt-5">Description</p>
+        <p className="text-dtext_color mt-5">{content.description}</p>
       </div>
     </div>
   );
