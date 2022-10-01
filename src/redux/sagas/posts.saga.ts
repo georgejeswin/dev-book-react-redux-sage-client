@@ -7,7 +7,7 @@ import Api from "../../services/api";
 import postsSlice from "../slices/posts.slice";
 
 function* createPost(
-  action: PayloadAction<{ title: string; description: string; image: string }>
+  action: PayloadAction<{ title: string; description: string; image: any }>
 ) {
   const { title, description, image } = action.payload;
   try {

@@ -22,7 +22,7 @@ const Home = () => {
       <div className="flex-1 xs:mt-5">
         <h1 className="text-indigo-500 font-bold mb-5">Our Active Users</h1>
         <div className="flex flex-col overflow-y-scroll h-[80vh]">
-          {users.map((user) => (
+          {users?.map((user) => (
             <UsersCard key={user.id} content={user} />
           ))}
         </div>
@@ -30,9 +30,8 @@ const Home = () => {
       <div className="min-w-2/5 xs:mt-5">
         <h1 className="text-indigo-500 font-bold mb-5">Feed</h1>
         <div className="flex flex-col overflow-y-scroll h-[80vh]">
-          {posts.map((post) => (
-            <FeedCard key={post.id} content={post} />
-          ))}
+          {posts.length &&
+            posts?.map((post) => <FeedCard key={post.id} content={post} />)}
         </div>
       </div>
       <div>

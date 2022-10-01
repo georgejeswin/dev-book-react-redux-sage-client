@@ -25,7 +25,7 @@ const FeedCard = ({ content }: IPostProps) => {
       </div>
       <div className="flex flex-col w-full flex-auto">
         <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnews.otakukart.com%2Fwp-content%2Fuploads%2F2019%2F07%2FStranger-Things-Season-3-Cast-Guide.jpg&f=1&nofb=1&ipt=eeeaa70842f2d0086eae91051b701a539b49f8ca7f79a1c6ccbbf543de7ab841&ipo=images"
+          src={content?.image}
           alt="Feed"
           className="rounded-lg w-full max-w-xl"
         />

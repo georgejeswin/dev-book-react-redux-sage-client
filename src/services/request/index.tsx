@@ -39,7 +39,7 @@ export const memoizedRefreshToken = mem(refreshTokenFn, {
 
 request.interceptors.request.use(async (config) => {
   try {
-    const token = await storageEngine.get("jwt");
+    const token = storageEngine.get("jwt");
     config.headers = {
       ...config.headers,
       Authorization: `Bearer ${token}`,
@@ -61,8 +61,10 @@ request.interceptors.response.use(
       await memoizedRefreshToken();
       return request(config);
     } else {
-      storageEngine.clear();
-      window.location.href = "/login";
+      if (error.response.status === 401 && config.sent) {
+        storageEngine.clear();
+        window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   }

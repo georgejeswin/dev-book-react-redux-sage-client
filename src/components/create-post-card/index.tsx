@@ -5,19 +5,37 @@ import { PostValidationSchema } from "../../validations/posts";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
+  const convertToBase64 = (file: File) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onloadend = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
   const handleCreatePost = (values: any) => {
-    dispatch(postsSlice.actions.createPost(values));
+    convertToBase64(values.image).then((res) => {
+      dispatch(postsSlice.actions.createPost({ ...values, image: res }));
+    });
   };
   return (
     <div>
       <Formik
-        initialValues={{ title: "", description: "", image: "" }}
+        initialValues={{
+          title: "fdsaafds",
+          description: "dfsaasdfds",
+          image: {},
+        }}
         onSubmit={(values, { setSubmitting }) => {
           handleCreatePost(values);
         }}
         validationSchema={PostValidationSchema}
       >
-        {({ values, errors, handleChange, handleSubmit }) => (
+        {({ values, errors, handleChange, handleSubmit, setFieldValue }) => (
           <Form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <h1 className="text-indigo-500 font-bold mb-5 mt-2">
               Create a Post
@@ -50,18 +68,19 @@ const CreatePost = () => {
                 <input
                   type="file"
                   name="image"
-                  id=""
-                  onChange={handleChange}
-                  value={values.image}
+                  id="image"
+                  accept="image/*"
+                  onChange={(event: any) => {
+                    setFieldValue("image", event.target.files[0]);
+                  }}
                   className="text-sm text-grey-500
-              file:mr-5 file:py-2 file:px-6
-              file:rounded-lg file:border-0
-              file:text-sm file:font-medium
-              file:text-blue-700
-              hover:file:cursor-pointer
-              dark:text-dtext_color
-              dark:file:bg-dbg_navbar
-            "
+                    file:mr-5 file:py-2 file:px-6
+                    file:rounded-lg file:border-0
+                    file:text-sm file:font-medium
+                    file:text-blue-700
+                    hover:file:cursor-pointer
+                    dark:text-dtext_color
+                    dark:file:bg-dbg_navbar"
                 />
                 {/* <span className="text-sm text-red-300 mt-2 mb-2">
                   {errors.image}
