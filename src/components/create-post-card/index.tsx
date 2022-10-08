@@ -26,9 +26,9 @@ const CreatePost = () => {
     <div>
       <Formik
         initialValues={{
-          title: "fdsaafds",
-          description: "dfsaasdfds",
-          image: {},
+          title: "",
+          description: "",
+          image: "",
         }}
         onSubmit={(values, { setSubmitting }) => {
           handleCreatePost(values);
